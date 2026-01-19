@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajeel Mods - Legendary Developer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e90ff;
+            --primary-dark: #0a74da;
+            --secondary: #ff4757;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #e8e8e8;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --neumorphic-light: #e8e8e8;
+            --neumorphic-shadow-light: rgba(255,255,255,0.9);
+            --neumorphic-shadow-dark: rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            direction: rtl;
+        }
+
+        /* Animated Background Elements */
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: -1;
+        }
+
+        .bg-1 {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            right: -150px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+        }
+
+        .bg-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(30,144,255,0.2) 0%, transparent 70%);
+        }
+
+        /* Glowing Dots */
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: 0.7;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+
+        /* Main Profile Card */
+        .profile-card {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px 35px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        /* Profile Header */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .profile-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .main-title {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Profile Info */
+        .profile-info {
+            background: rgba(248, 249, 250, 0.7);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 35px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-label i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+            text-align: left;
+        }
+
+        .special-value {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        /* Tagline Animation */
+        .tagline-container {
+            text-align: center;
+            margin: 30px 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tagline {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .tagline::before,
+        .tagline::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        .tagline::before {
+            right: -10px;
+        }
+
+        .tagline::after {
+            left: -10px;
+        }
+
+        /* Buttons */
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 18px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(30, 144, 255, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(30, 144, 255, 0.4);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn span, .btn i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn i {
+            font-size: 22px;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-youtube {
+            background: linear-gradient(135deg, #FF0000, #CC0000);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Skills */
+        .skills-container {
+            margin: 30px 0;
+        }
+
+        .skills-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: rgba(30, 144, 255, 0.1);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            border: 2px solid rgba(30, 144, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .profile-footer {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(0,0,0,0.05);
+        }
+
+        .owner-name {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .owner-title {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Glow Effect */
+        .glow-effect {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(30,144,255,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: -1;
+            animation: pulse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 30px 25px;
+                max-width: 95%;
+            }
+            
+            .main-title {
+                font-size: 28px;
+            }
+            
+            .info-value {
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 16px 20px;
+                font-size: 16px;
+            }
+            
+            .tagline {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .profile-card {
+                padding: 25px 20px;
+            }
+            
+            .main-title {
+                font-size: 24px;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .info-value {
+                text-align: right;
+            }
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            border: 2px solid rgba(30, 144, 255, 0.1);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+            background: var(--primary);
+            color: white;
+        }
+
+        .theme-toggle i {
+            font-size: 22px;
+            color: var(--dark);
+        }
+
+        .theme-toggle:hover i {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+    
+    <!-- Animated Dots -->
+    <div class="dot" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="dot" style="top: 60%; left: 85%; animation-delay: 1s;"></div>
+    <div class="dot" style="top: 80%; left: 20%; animation-delay: 2s;"></div>
+    <div class="dot" style="top: 30%; left: 70%; animation-delay: 3s;"></div>
+    
+    <!-- Glow Effects -->
+    <div class="glow-effect" style="top: 10%; left: 10%;"></div>
+    <div class="glow-effect" style="bottom: 10%; right: 10%; animation-delay: 2s;"></div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Main Profile Card -->
+    <div class="profile-card" id="profileCard">
+        <!-- Header -->
+        <div class="profile-header">
+            <h1 class="main-title">Sajeel Mods OFC</h1>
+            <p class="subtitle">Legendary Developer & Hacker</p>
+        </div>
+
+        <!-- Profile Information -->
+        <div class="profile-info">
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-user"></i>
+                    <span>نام:</span>
+                </div>
+                <div class="info-value special-value">ＳムＪＥＥＬ</div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-crown"></i>
+                    <span>عمر:</span>
+                </div>
+                <div class="info-value special-value">✞〘Ł€Ꮆ€ŇĐ〙✞</div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-star"></i>
+                    <span>ذات:</span>
+                </div>
+                <div class="info-value special-value">MALiK</div>
+            </div>
+            
+            <div class="info-row">
+                <div class="info-label">
+                    <i class="fas fa-city"></i>
+                    <span>شہر:</span>
+                </div>
+                <div class="info-value special-value">ANONYMOUS</div>
+            </div>
+        </div>
+
+        <!-- Tagline -->
+        <div class="tagline-container">
+            <div class="tagline">WEB DEVELOPER & White Hat H4CK3R</div>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-container">
+            <h3 class="skills-title">Specializations</h3>
+            <div class="skills">
+                <div class="skill-tag">Web Development</div>
+                <div class="skill-tag">Ethical Hacking</div>
+                <div class="skill-tag">Cyber Security</div>
+                <div class="skill-tag">UI/UX Design</div>
+                <div class="skill-tag">Mobile Apps</div>
+                <div class="skill-tag">Apps Modding</div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons-container">
+            <a href="https://whatsapp.com/channel/0029Vb7L6DYJP212XRXu0B3x" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp Channel</span>
+            </a>
+            
+            <a href="https://youtube.com/@sajeelmods?si=5lKDjRK4bLWUMYOZ" class="btn btn-youtube">
+                <i class="fab fa-youtube"></i>
+                <span>Youtube Channel</span>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="profile-footer">
+            <div class="owner-name">Malik Sajeel Raza</div>
+            <div class="owner-title">Founder & Lead Developer</div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const profileCard = document.getElementById('profileCard');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            profileCard.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                themeToggle.style.background = 'rgba(0, 0, 0, 0.8)';
+                themeToggle.style.color = 'white';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                themeToggle.style.background = 'rgba(255, 255, 255, 0.9)';
+                themeToggle.style.color = 'var(--dark)';
+            }
+        });
+
+        // Add CSS for dark mode
+        const style = document.createElement('style');
+        style.textContent = `
+            body.dark-mode {
+                background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+            }
+            
+            .profile-card.dark-mode {
+                background: rgba(30, 30, 46, 0.95);
+                color: #f0f0f0;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .profile-card.dark-mode .profile-info {
+                background: rgba(40, 40, 60, 0.7);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            
+            .profile-card.dark-mode .info-label {
+                color: #ccc;
+            }
+            
+            .profile-card.dark-mode .info-value {
+                color: #fff;
+            }
+            
+            .profile-card.dark-mode .subtitle,
+            .profile-card.dark-mode .owner-title {
+                color: #aaa;
+            }
+            
+            .profile-card.dark-mode .skill-tag {
+                background: rgba(30, 144, 255, 0.2);
+                border: 2px solid rgba(30, 144, 255, 0.3);
+                color: #88ccff;
+            }
+            
+            .profile-card.dark-mode .profile-footer {
+                border-top: 2px solid rgba(255, 255, 255, 0.05);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Button hover effects
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Skill tags animation
+        document.querySelectorAll('.skill-tag').forEach((tag, index) => {
+            tag.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.7);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // Auto-typing effect for tagline
+        const tagline = document.querySelector('.tagline');
+        const originalText = tagline.textContent;
+        tagline.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                tagline.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                setTimeout(() => {
+                    tagline.textContent = '';
+                    i = 0;
+                    typeWriter();
+                }, 3000);
+            }
+        }
+        
+        setTimeout(typeWriter, 1000);
+    </script>
+</body>
+</html>
