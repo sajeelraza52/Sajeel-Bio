@@ -1,705 +1,328 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sajeel Mods - Legendary Developer</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sajeel Raza — I Build Websites People Remember | Sajeel Mods</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: #0b0b10; color: #f2f2f5; font-family: Arial, Helvetica, sans-serif; overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+  .wrap { max-width: 680px; margin: 0 auto; }
 
-        :root {
-            --primary: #1e90ff;
-            --primary-dark: #0a74da;
-            --secondary: #ff4757;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --gray: #e8e8e8;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --neumorphic-light: #e8e8e8;
-            --neumorphic-shadow-light: rgba(255,255,255,0.9);
-            --neumorphic-shadow-dark: rgba(0,0,0,0.15);
-        }
+  @keyframes letterIn { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes shimmer { from { background-position: 0% 50%; } to { background-position: 200% 50%; } }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes pulseGold { 0%,100% { box-shadow: 0 0 0 0 rgba(212,175,55,.5); } 50% { box-shadow: 0 0 0 12px rgba(212,175,55,0); } }
+  @keyframes floatCrown { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+  @keyframes popIn { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: scale(1); } }
 
-        body {
-            font-family: 'Poppins', 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-            direction: rtl;
-        }
+  .gold { background: linear-gradient(100deg, #f7d774, #d4af37 30%, #fff2b0 50%, #d4af37 70%, #f7d774); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 4s linear infinite; }
 
-        /* Animated Background Elements */
-        .bg-element {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: -1;
-        }
+  /* ---------- NAV ---------- */
+  nav { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(11,11,16,.92); backdrop-filter: blur(6px); border-bottom: 1px solid #1e1e28; transition: box-shadow .4s; }
+  nav.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,.6); }
+  nav .logo { font-weight: 900; font-size: 17px; letter-spacing: 1px; }
+  nav .logo span { color: #d4af37; }
+  nav .links { display: flex; gap: 14px; font-size: 13px; font-weight: bold; color: #c9c9d8; }
+  nav .links a { transition: color .3s; }
+  nav .links a:hover { color: #d4af37; }
+  nav .talk { background: #d4af37; color: #111; font-weight: 900; font-size: 13px; padding: 9px 16px; border-radius: 20px; transition: transform .25s ease; }
+  nav .talk:hover { transform: scale(1.06); }
+  nav .menu-btn { display: none; background: #d4af37; color: #111; border: none; font-weight: bold; padding: 8px 14px; border-radius: 8px; cursor: pointer; }
+  @media (max-width: 560px) {
+    nav .links, nav .talk { display: none; }
+    nav .links.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: #111118; padding: 12px 18px 16px; gap: 12px; border-bottom: 1px solid #d4af37; }
+    nav .menu-btn { display: block; }
+  }
+  .sample-pill { display: block; width: max-content; margin: 14px auto 0; background: #d4af37; color: #111; font-weight: 900; font-size: 11px; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; animation: popIn .6s ease both; }
 
-        .bg-1 {
-            width: 300px;
-            height: 300px;
-            top: -150px;
-            right: -150px;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-        }
+  /* ---------- HERO ---------- */
+  .hero { text-align: center; padding: 34px 16px 30px; }
+  .crown { font-size: 54px; display: inline-block; animation: floatCrown 3.2s ease-in-out infinite; filter: drop-shadow(0 6px 14px rgba(212,175,55,.45)); }
+  .hero h1 { font-size: 62px; line-height: .95; font-weight: 900; letter-spacing: 1px; margin-top: 10px; }
+  .hero h1 span { display: inline-block; opacity: 0; animation: letterIn .6s cubic-bezier(.2,.9,.3,1.2) forwards; }
+  .hero h1 .l1{animation-delay:.05s}.hero h1 .l2{animation-delay:.1s}.hero h1 .l3{animation-delay:.15s}
+  .hero h1 .l4{animation-delay:.2s}.hero h1 .l5{animation-delay:.25s}.hero h1 .l6{animation-delay:.3s}
+  .hero h1 .l7{animation-delay:.35s}.hero h1 .l8{animation-delay:.4s}.hero h1 .l9{animation-delay:.45s}
+  .hero h1 .l10{animation-delay:.5s}.hero h1 .l11{animation-delay:.55s}
+  .hero .tag { margin-top: 16px; font-size: 21px; font-weight: 900; line-height: 1.35; animation: fadeUp .8s ease .6s both; }
+  .hero .tag em { color: #d4af37; font-style: normal; }
+  .hero .sub { margin: 12px auto 0; max-width: 460px; font-size: 14px; line-height: 1.8; color: #a9a9bd; animation: fadeUp .8s ease .7s both; }
+  .hero .cta { margin-top: 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; animation: fadeUp .8s ease .8s both; }
+  .btn { display: inline-block; padding: 13px 26px; border-radius: 30px; font-weight: 900; font-size: 14px; transition: transform .25s ease; }
+  .btn:hover { transform: scale(1.06); }
+  .btn-gold { background: #d4af37; color: #111; animation: pulseGold 2s ease-in-out infinite; }
+  .btn-wa { background: #25d366; color: #062b16; }
 
-        .bg-2 {
-            width: 200px;
-            height: 200px;
-            bottom: -100px;
-            left: -100px;
-            background: radial-gradient(circle, rgba(30,144,255,0.2) 0%, transparent 70%);
-        }
+  /* ---------- MARQUEE ---------- */
+  .marquee { overflow: hidden; border-top: 1px solid #1e1e28; border-bottom: 1px solid #1e1e28; padding: 12px 0; white-space: nowrap; }
+  .marquee-track { display: inline-block; animation: marquee 20s linear infinite; }
+  .marquee-track span { font-weight: 900; font-size: 14px; letter-spacing: 2px; color: #8a8a9e; padding: 0 18px; }
+  .marquee-track span b { color: #d4af37; }
 
-        /* Glowing Dots */
-        .dot {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--primary);
-            border-radius: 50%;
-            filter: blur(2px);
-            opacity: 0.7;
-            animation: float 6s infinite ease-in-out;
-        }
+  /* ---------- SECTIONS ---------- */
+  section { padding: 40px 16px; }
+  section h2 { font-size: 28px; font-weight: 900; line-height: 1.15; }
+  section h2 em { color: #d4af37; font-style: normal; }
+  section .sub { color: #a9a9bd; font-size: 13.5px; line-height: 1.7; margin: 8px 0 24px; max-width: 480px; }
+  .reveal { opacity: 0; transform: translateY(34px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal.d1 { transition-delay: .1s; } .reveal.d2 { transition-delay: .2s; } .reveal.d3 { transition-delay: .3s; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.1); }
-        }
+  /* ---------- SERVICES ---------- */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: #14141d; border: 1px solid #23232f; border-radius: 14px; padding: 18px 16px; transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+  .card:hover { transform: translateY(-5px); border-color: #d4af37; box-shadow: 0 10px 26px rgba(0,0,0,.5); }
+  .card .ic { font-size: 26px; color: #d4af37; }
+  .card h3 { font-size: 15.5px; margin-top: 10px; }
+  .card p { font-size: 13px; line-height: 1.7; color: #a9a9bd; margin-top: 6px; }
+  .card .price { display: inline-block; margin-top: 10px; font-size: 12.5px; font-weight: 900; color: #d4af37; background: rgba(212,175,55,.12); padding: 4px 10px; border-radius: 16px; }
 
-        /* Main Profile Card */
-        .profile-card {
-            width: 100%;
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 40px 35px;
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+  /* ---------- PROJECTS ---------- */
+  .proj { display: block; background: #14141d; border: 1px solid #23232f; border-radius: 14px; padding: 18px 16px; transition: transform .3s ease, border-color .3s ease; }
+  .proj:hover { transform: translateY(-5px); border-color: #d4af37; }
+  .proj .thumb { height: 74px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; color: #fff; margin-bottom: 12px; }
+  .proj h3 { font-size: 15.5px; }
+  .proj p { font-size: 13px; line-height: 1.7; color: #a9a9bd; margin-top: 6px; }
+  .proj .link { display: inline-block; margin-top: 10px; font-size: 12.5px; font-weight: bold; color: #d4af37; }
+  .proj .link::after { content: " ↗"; }
 
-        .profile-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-        }
+  /* ---------- STATS ---------- */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center; }
+  @media (max-width: 480px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { background: #14141d; border: 1px solid #23232f; border-radius: 14px; padding: 18px 8px; }
+  .stat .num { font-size: 30px; font-weight: 900; color: #d4af37; }
+  .stat .lbl { font-size: 12px; color: #a9a9bd; margin-top: 5px; line-height: 1.5; }
 
-        /* Profile Header */
-        .profile-header {
-            text-align: center;
-            margin-bottom: 35px;
-            position: relative;
-        }
+  /* ---------- PROCESS ---------- */
+  .step { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+  .step .n { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; background: #d4af37; color: #111; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .step h3 { font-size: 15.5px; }
+  .step p { font-size: 13px; line-height: 1.7; color: #a9a9bd; margin-top: 4px; }
 
-        .profile-header::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            right: 50%;
-            transform: translateX(50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 2px;
-        }
+  /* ---------- TESTIMONIALS ---------- */
+  .quote { background: #14141d; border: 1px solid #23232f; border-left: 3px solid #d4af37; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .quote p { font-size: 13.5px; line-height: 1.8; color: #d8d8e2; font-style: italic; }
+  .quote .who { margin-top: 10px; font-size: 12.5px; font-weight: bold; color: #d4af37; }
+  .quote .stars { color: #d4af37; letter-spacing: 2px; font-size: 13px; margin-top: 6px; }
+  .sample-tag { display: inline-block; font-size: 10px; font-weight: 900; letter-spacing: 1px; background: rgba(212,175,55,.15); color: #d4af37; padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
 
-        .main-title {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
+  /* ---------- CTA / FORM ---------- */
+  .cta-box { background: linear-gradient(160deg, #1a1a24, #14141d); border: 1px solid #2a2a38; border-radius: 18px; padding: 24px 18px; text-align: center; }
+  .cta-box h2 { font-size: 26px; }
+  .cta-box p { color: #a9a9bd; font-size: 13.5px; line-height: 1.7; margin: 10px 0 18px; }
+  .cta-box input, .cta-box select, .cta-box textarea { width: 100%; background: #0b0b10; border: 1px solid #2a2a38; color: #fff; border-radius: 10px; padding: 12px 14px; font-size: 14px; margin-bottom: 10px; outline: none; font-family: inherit; }
+  .cta-box input:focus, .cta-box select:focus, .cta-box textarea:focus { border-color: #d4af37; }
+  .cta-box textarea { min-height: 80px; resize: vertical; }
+  .cta-box .btn { border: none; cursor: pointer; width: 100%; font-size: 15px; }
+  .contact-line { margin-top: 14px; font-size: 13px; color: #a9a9bd; line-height: 2; }
+  .contact-line b { color: #d4af37; }
 
-        .subtitle {
-            font-size: 18px;
-            color: #666;
-            font-weight: 500;
-        }
+  footer { text-align: center; color: #66667a; font-size: 12px; line-height: 1.9; padding: 22px 14px 90px; border-top: 1px solid #1e1e28; }
+  footer b { color: #d4af37; }
 
-        /* Profile Info */
-        .profile-info {
-            background: rgba(248, 249, 250, 0.7);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 35px;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .info-row:last-child {
-            border-bottom: none;
-        }
-
-        .info-label {
-            font-size: 16px;
-            font-weight: 600;
-            color: #555;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .info-label i {
-            color: var(--primary);
-            width: 20px;
-        }
-
-        .info-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--dark);
-            text-align: left;
-        }
-
-        .special-value {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 800;
-        }
-
-        /* Tagline Animation */
-        .tagline-container {
-            text-align: center;
-            margin: 30px 0;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tagline {
-            font-size: 22px;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            position: relative;
-            padding: 0 20px;
-        }
-
-        .tagline::before,
-        .tagline::after {
-            content: '✦';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary);
-            font-size: 18px;
-            opacity: 0.8;
-        }
-
-        .tagline::before {
-            right: -10px;
-        }
-
-        .tagline::after {
-            left: -10px;
-        }
-
-        /* Buttons */
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            padding: 18px 25px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            text-decoration: none;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(30, 144, 255, 0.3);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(30, 144, 255, 0.4);
-        }
-
-        .btn:hover::before {
-            opacity: 1;
-        }
-
-        .btn span, .btn i {
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn i {
-            font-size: 22px;
-        }
-
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn-youtube {
-            background: linear-gradient(135deg, #FF0000, #CC0000);
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
-        }
-
-        /* Skills */
-        .skills-container {
-            margin: 30px 0;
-        }
-
-        .skills-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
-
-        .skill-tag {
-            background: rgba(30, 144, 255, 0.1);
-            color: var(--primary);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 600;
-            border: 2px solid rgba(30, 144, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        /* Footer */
-        .profile-footer {
-            text-align: center;
-            margin-top: 35px;
-            padding-top: 25px;
-            border-top: 2px solid rgba(0,0,0,0.05);
-        }
-
-        .owner-name {
-            font-size: 22px;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--secondary), var(--primary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 8px;
-        }
-
-        .owner-title {
-            font-size: 16px;
-            color: #666;
-            font-weight: 500;
-        }
-
-        /* Glow Effect */
-        .glow-effect {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(30,144,255,0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(40px);
-            z-index: -1;
-            animation: pulse 4s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 0.6; transform: scale(1.1); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 480px) {
-            .profile-card {
-                padding: 30px 25px;
-                max-width: 95%;
-            }
-            
-            .main-title {
-                font-size: 28px;
-            }
-            
-            .info-value {
-                font-size: 16px;
-            }
-            
-            .btn {
-                padding: 16px 20px;
-                font-size: 16px;
-            }
-            
-            .tagline {
-                font-size: 20px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .profile-card {
-                padding: 25px 20px;
-            }
-            
-            .main-title {
-                font-size: 24px;
-            }
-            
-            .info-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-            
-            .info-value {
-                text-align: right;
-            }
-        }
-
-        /* Dark Mode Toggle */
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            border: 2px solid rgba(30, 144, 255, 0.1);
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: rotate(30deg);
-            background: var(--primary);
-            color: white;
-        }
-
-        .theme-toggle i {
-            font-size: 22px;
-            color: var(--dark);
-        }
-
-        .theme-toggle:hover i {
-            color: white;
-        }
-    </style>
+  .float-wa { position: fixed; bottom: 16px; right: 16px; background: #25d366; color: #062b16; font-weight: 900; font-size: 14px; padding: 13px 18px; border-radius: 30px; box-shadow: 0 4px 18px rgba(0,0,0,.5); z-index: 50; animation: pulseGold 2.2s ease-in-out infinite; }
+</style>
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="bg-element bg-1"></div>
-    <div class="bg-element bg-2"></div>
-    
-    <!-- Animated Dots -->
-    <div class="dot" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
-    <div class="dot" style="top: 60%; left: 85%; animation-delay: 1s;"></div>
-    <div class="dot" style="top: 80%; left: 20%; animation-delay: 2s;"></div>
-    <div class="dot" style="top: 30%; left: 70%; animation-delay: 3s;"></div>
-    
-    <!-- Glow Effects -->
-    <div class="glow-effect" style="top: 10%; left: 10%;"></div>
-    <div class="glow-effect" style="bottom: 10%; right: 10%; animation-delay: 2s;"></div>
+<div class="wrap">
 
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
+  <nav id="nav">
+    <div class="logo">👑 SAJEEL <span>MODS</span></div>
+    <button class="menu-btn" onclick="toggleMenu()">MENU</button>
+    <div class="links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
     </div>
+    <a class="talk" href="#contact">Let's Talk</a>
+  </nav>
 
-    <!-- Main Profile Card -->
-    <div class="profile-card" id="profileCard">
-        <!-- Header -->
-        <div class="profile-header">
-            <h1 class="main-title">Sajeel Mods OFC</h1>
-            <p class="subtitle">Legendary Developer & Hacker</p>
-        </div>
-
-        <!-- Profile Information -->
-        <div class="profile-info">
-            <div class="info-row">
-                <div class="info-label">
-                    <i class="fas fa-user"></i>
-                    <span>نام:</span>
-                </div>
-                <div class="info-value special-value">ＳムＪＥＥＬ</div>
-            </div>
-            
-            <div class="info-row">
-                <div class="info-label">
-                    <i class="fas fa-crown"></i>
-                    <span>عمر:</span>
-                </div>
-                <div class="info-value special-value">✞〘Ł€Ꮆ€ŇĐ〙✞</div>
-            </div>
-            
-            <div class="info-row">
-                <div class="info-label">
-                    <i class="fas fa-star"></i>
-                    <span>ذات:</span>
-                </div>
-                <div class="info-value special-value">MALiK</div>
-            </div>
-            
-            <div class="info-row">
-                <div class="info-label">
-                    <i class="fas fa-city"></i>
-                    <span>شہر:</span>
-                </div>
-                <div class="info-value special-value">ANONYMOUS</div>
-            </div>
-        </div>
-
-        <!-- Tagline -->
-        <div class="tagline-container">
-            <div class="tagline">WEB DEVELOPER & White Hat H4CK3R</div>
-        </div>
-
-        <!-- Skills -->
-        <div class="skills-container">
-            <h3 class="skills-title">Specializations</h3>
-            <div class="skills">
-                <div class="skill-tag">Web Development</div>
-                <div class="skill-tag">Ethical Hacking</div>
-                <div class="skill-tag">Cyber Security</div>
-                <div class="skill-tag">UI/UX Design</div>
-                <div class="skill-tag">Mobile Apps</div>
-                <div class="skill-tag">Apps Modding</div>
-            </div>
-        </div>
-
-        <!-- Buttons -->
-        <div class="buttons-container">
-            <a href="https://whatsapp.com/channel/0029Vb7L6DYJP212XRXu0B3x" class="btn btn-whatsapp">
-                <i class="fab fa-whatsapp"></i>
-                <span>WhatsApp Channel</span>
-            </a>
-            
-            <a href="https://youtube.com/@sajeelmods?si=5lKDjRK4bLWUMYOZ" class="btn btn-youtube">
-                <i class="fab fa-youtube"></i>
-                <span>Youtube Channel</span>
-            </a>
-        </div>
-
-        <!-- Footer -->
-        <div class="profile-footer">
-            <div class="owner-name">Malik Sajeel Raza</div>
-            <div class="owner-title">Founder & Lead Developer</div>
-        </div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="crown">👑</div>
+    <h1><span class="l1 gold">S</span><span class="l2 gold">A</span><span class="l3 gold">J</span><span class="l4 gold">E</span><span class="l5 gold">E</span><span class="l6 gold">L</span><br><span class="l7 gold">R</span><span class="l8 gold">A</span><span class="l9 gold">Z</span><span class="l10 gold">A</span></h1>
+    <p class="tag">I BUILD WEBSITES<br><em>PEOPLE REMEMBER.</em></p>
+    <p class="sub">YouTube thumbnails, business websites aur free tools — sab kuch ek hi jagah. Cinematic style, ads-free, 1 din mein tayyar.</p>
+    <div class="cta">
+      <a class="btn btn-gold" href="#projects">View Projects</a>
+      <a class="btn btn-wa" href="https://wa.me/923061601587?text=Assalam-o-Alaikum!%20Mujhe%20website%20banwani%20hai.">WhatsApp Karein</a>
     </div>
+  </div>
 
-    <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const profileCard = document.getElementById('profileCard');
-        const body = document.body;
-        
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            profileCard.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                themeToggle.style.background = 'rgba(0, 0, 0, 0.8)';
-                themeToggle.style.color = 'white';
-            } else {
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                themeToggle.style.background = 'rgba(255, 255, 255, 0.9)';
-                themeToggle.style.color = 'var(--dark)';
-            }
-        });
+  <!-- TOOLS MARQUEE -->
+  <div class="marquee"><div class="marquee-track"><span>HTML <b>✦</b> CSS <b>✦</b> JAVASCRIPT <b>✦</b> FIREBASE <b>✦</b> VERCEL <b>✦</b> GITHUB <b>✦</b> </span><span>HTML <b>✦</b> CSS <b>✦</b> JAVASCRIPT <b>✦</b> FIREBASE <b>✦</b> VERCEL <b>✦</b> GITHUB <b>✦</b> </span></div></div>
 
-        // Add CSS for dark mode
-        const style = document.createElement('style');
-        style.textContent = `
-            body.dark-mode {
-                background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
-            }
-            
-            .profile-card.dark-mode {
-                background: rgba(30, 30, 46, 0.95);
-                color: #f0f0f0;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .profile-card.dark-mode .profile-info {
-                background: rgba(40, 40, 60, 0.7);
-                border: 1px solid rgba(255, 255, 255, 0.05);
-            }
-            
-            .profile-card.dark-mode .info-label {
-                color: #ccc;
-            }
-            
-            .profile-card.dark-mode .info-value {
-                color: #fff;
-            }
-            
-            .profile-card.dark-mode .subtitle,
-            .profile-card.dark-mode .owner-title {
-                color: #aaa;
-            }
-            
-            .profile-card.dark-mode .skill-tag {
-                background: rgba(30, 144, 255, 0.2);
-                border: 2px solid rgba(30, 144, 255, 0.3);
-                color: #88ccff;
-            }
-            
-            .profile-card.dark-mode .profile-footer {
-                border-top: 2px solid rgba(255, 255, 255, 0.05);
-            }
-        `;
-        document.head.appendChild(style);
+  <!-- SERVICES -->
+  <section class="reveal" id="services">
+    <h2>SOLUTIONS FOR YOUR <em>DIGITAL GROWTH</em></h2>
+    <p class="sub">Chhoti dukaan ho ya YouTube channel — har kaam ke liye ek solution hai.</p>
+    <div class="grid">
+      <div class="card reveal d1"><div class="ic">▣</div><h3>YouTube Thumbnails</h3><p>Gaming, vlog, tech — click-worthy thumbnails jo views barhayein.</p><span class="price">Rs 300 – 500</span></div>
+      <div class="card reveal d2"><div class="ic">◆</div><h3>Portfolio Websites</h3><p>Apni pehchan wali premium portfolio website — naam, kaam, contact sab kuch.</p><span class="price">Rs 1,000 – 2,000</span></div>
+      <div class="card reveal d1"><div class="ic">▤</div><h3>Shop Websites</h3><p>Mobile shop, kapron ki dukaan ya restaurant — products, prices aur WhatsApp order button.</p><span class="price">Rs 1,000</span></div>
+      <div class="card reveal d2"><div class="ic">⬡</div><h3>Free Tools</h3><p>Toolkit, Unban Tool, BanChecker, Video Maker — sab free, sab ads-free.</p><span class="price">FREE</span></div>
+      <div class="card reveal d1"><div class="ic">✆</div><h3>WhatsApp Tools</h3><p>Link generator, unban appeal, ban checker — WhatsApp ke har masle ka hal.</p><span class="price">FREE</span></div>
+      <div class="card reveal d2"><div class="ic">▶</div><h3>Video Tools</h3><p>AI video maker aur story prompts — TikTok aur YouTube Shorts ke liye tayyar.</p><span class="price">FREE</span></div>
+      <div class="card reveal d1"><div class="ic">◐</div><h3>Photo Tools</h3><p>Screenshot editor, stylish DP maker — photo ko premium banao, ek click mein.</p><span class="price">FREE</span></div>
+      <div class="card reveal d2"><div class="ic">⇪</div><h3>Hosting &amp; Deploy</h3><p>File bhejo, live link pao — Vercel deploy, minutes mein, apne naam ke sath.</p><span class="price">FREE</span></div>
+    </div>
+  </section>
 
-        // Button hover effects
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px) scale(1.02)';
-            });
-            
-            button.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+  <!-- PROJECTS -->
+  <section class="reveal" id="projects">
+    <h2>RECENT <em>PROJECTS</em></h2>
+    <p class="sub">Live websites — khud khol kar dekho, sab chal rahe hain.</p>
+    <div class="grid">
+      <a class="proj reveal d1" href="https://sajeel-toolkit-ofc.vercel.app" target="_blank" rel="noopener"><div class="thumb" style="background:linear-gradient(135deg,#e63030,#7b1d1d)">🧰</div><h3>Sajeel Mods Toolkit</h3><p>All-in-one free tools — login, admin panel aur live sync ke sath.</p><span class="link">sajeel-toolkit-ofc.vercel.app</span></a>
+      <a class="proj reveal d2" href="https://sajeel-unban-tool.vercel.app" target="_blank" rel="noopener"><div class="thumb" style="background:linear-gradient(135deg,#25d366,#0a5c2e)">✓</div><h3>WhatsApp Unban Tool</h3><p>Ban appeal guide + email generator — hazaron log use kar chuke.</p><span class="link">sajeel-unban-tool.vercel.app</span></a>
+      <a class="proj reveal d1" href="https://sajeel-hosting.vercel.app" target="_blank" rel="noopener"><div class="thumb" style="background:linear-gradient(135deg,#7b5ea7,#3a2a5e)">⇪</div><h3>Sajeel Mods Hosting</h3><p>File upload karo, apne naam ka live link pao — free web hosting.</p><span class="link">sajeel-hosting.vercel.app</span></a>
+      <a class="proj reveal d2" href="https://sajeel-portfolio-builder.vercel.app" target="_blank" rel="noopener"><div class="thumb" style="background:linear-gradient(135deg,#d4af37,#8a6d1b)">◆</div><h3>Portfolio Builder</h3><p>Naam aur details likho — apni portfolio website khud banao, ek click mein.</p><span class="link">sajeel-portfolio-builder.vercel.app</span></a>
+      <a class="proj reveal d1" href="https://sajeel-voice-changer.vercel.app" target="_blank" rel="noopener"><div class="thumb" style="background:linear-gradient(135deg,#ff8c1a,#b35400)">♪</div><h3>Voice Changer</h3><p>Apni awaz badlo — fun voice effects, browser mein hi chalta hai.</p><span class="link">sajeel-voice-changer.vercel.app</span></a>
+      <a class="proj reveal d2" href="https://portfolio-bilal-ahmed.vercel.app" target="_blank" rel="noopener"><div class="thumb" style="background:linear-gradient(135deg,#2b8cff,#0a3d7a)">▣</div><h3>Client Portfolio — Bilal Ahmed</h3><p>Client ke liye banayi gayi portfolio website — live aur working.</p><span class="link">portfolio-bilal-ahmed.vercel.app</span></a>
+    </div>
+  </section>
 
-        // Skill tags animation
-        document.querySelectorAll('.skill-tag').forEach((tag, index) => {
-            tag.style.animationDelay = `${index * 0.1}s`;
-        });
+  <!-- STATS -->
+  <section class="reveal" id="stats">
+    <div class="stats">
+      <div class="stat reveal d1"><div class="num"><span class="count" data-target="10">0</span>+</div><div class="lbl">Live Websites</div></div>
+      <div class="stat reveal d2"><div class="num"><span class="count" data-target="8">0</span>+</div><div class="lbl">Free Tools</div></div>
+      <div class="stat reveal d3"><div class="num"><span class="count" data-target="1">0</span> Day</div><div class="lbl">Delivery Time</div></div>
+      <div class="stat reveal d1"><div class="num"><span class="count" data-target="100">0</span>%</div><div class="lbl">Ads-Free</div></div>
+    </div>
+  </section>
 
-        // Add ripple effect to buttons
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.7);
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    width: ${size}px;
-                    height: ${size}px;
-                    top: ${y}px;
-                    left: ${x}px;
-                `;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
+  <!-- PROCESS -->
+  <section class="reveal" id="process">
+    <h2>A SIMPLE &amp; <em>CLEAN PROCESS</em></h2>
+    <p class="sub">Order karna asaan hai — 4 steps, koi lambi baat nahi.</p>
+    <div class="step reveal d1"><div class="n">1</div><div><h3>WhatsApp Par Batao</h3><p>Kya chahiye — thumbnail, website ya tool? Apna naam aur details bhej do.</p></div></div>
+    <div class="step reveal d2"><div class="n">2</div><div><h3>Main Banata Hoon</h3><p>Design aur kaam shuru — tum apna kaam karo, website meri zimmedari.</p></div></div>
+    <div class="step reveal d3"><div class="n">3</div><div><h3>Link Milta Hai</h3><p>Live link WhatsApp par — kholo, dekho, pasand aaye to payment karo.</p></div></div>
+    <div class="step reveal d1"><div class="n">4</div><div><h3>Update &amp; Support</h3><p>Bad mein kuch badalna ho to bata do — update kar dunga.</p></div></div>
+  </section>
 
-        // Add ripple animation
-        const rippleStyle = document.createElement('style');
-        rippleStyle.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(rippleStyle);
+  <!-- TESTIMONIALS -->
+  <section class="reveal" id="reviews">
+    <h2>KIND WORDS FROM <em>AMAZING CLIENTS</em></h2>
+    <p class="sub">Ye sample reviews hain — apne asli clients ke reviews yahan lagao.</p>
+    <div class="quote reveal d1"><p>"Website boht achi bani hai, ek din mein tayyar ho gayi. Customer ab WhatsApp par order karte hain."</p><div class="stars">★★★★★</div><div class="who">Sample Client — Mobile Shop Owner<span class="sample-tag">SAMPLE</span></div></div>
+    <div class="quote reveal d2"><p>"Thumbnail dekh kar views barh gaye. Kaam fast aur price bhi munasib hai."</p><div class="stars">★★★★★</div><div class="who">Sample Client — YouTuber<span class="sample-tag">SAMPLE</span></div></div>
+    <div class="quote reveal d3"><p>"Unban tool se mera dost ka number wapas aagaya. Boht shukriya Sajeel bhai."</p><div class="stars">★★★★★</div><div class="who">Sample Client — WhatsApp User<span class="sample-tag">SAMPLE</span></div></div>
+  </section>
 
-        // Auto-typing effect for tagline
-        const tagline = document.querySelector('.tagline');
-        const originalText = tagline.textContent;
-        tagline.textContent = '';
-        
-        let i = 0;
-        function typeWriter() {
-            if (i < originalText.length) {
-                tagline.textContent += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            } else {
-                setTimeout(() => {
-                    tagline.textContent = '';
-                    i = 0;
-                    typeWriter();
-                }, 3000);
-            }
-        }
-        
-        setTimeout(typeWriter, 1000);
-    </script>
+  <!-- CTA -->
+  <section class="reveal" id="contact">
+    <div class="cta-box">
+      <h2>HAVE A PROJECT <em class="gold">IN MIND?</em></h2>
+      <p>Form bharo — WhatsApp khul jayega, message pehle se likha hoga. Bas Send dabao.</p>
+      <input id="fName" type="text" placeholder="Apna naam" maxlength="60">
+      <select id="fType">
+        <option value="Website">Website banwani hai</option>
+        <option value="Thumbnail">Thumbnail banwana hai</option>
+        <option value="Shop Website">Dukaan ki website</option>
+        <option value="Tool">Koi tool banwana hai</option>
+        <option value="Other">Kuch aur</option>
+      </select>
+      <textarea id="fMsg" placeholder="Apne project ke baare mein likho..." maxlength="500"></textarea>
+      <button class="btn btn-gold" onclick="sendProject()">WhatsApp Par Bhejo</button>
+      <div class="contact-line">
+        📱 WhatsApp: <b>0306 1601587</b><br>
+        📍 Sargodha, Pakistan • 🕐 1 din mein delivery
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 <b>SAJEEL MODS</b> — I Build Websites People Remember.<br>
+    Thumbnails • Websites • Free Tools • WhatsApp: 0306 1601587
+  </footer>
+
+</div>
+
+<a class="float-wa" href="https://wa.me/923061601587?text=Assalam-o-Alaikum!%20Mujhe%20website%20banwani%20hai.">WhatsApp</a>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('#navLinks a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+  window.addEventListener('scroll', function () {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+  // Scroll-reveal (fallback if IntersectionObserver missing)
+  var revealEls = document.querySelectorAll('.reveal');
+  function showAllReveals() { revealEls.forEach(function (el) { el.classList.add('visible'); }); }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    showAllReveals();
+  }
+  // Animated counters
+  function runCounters() {
+    document.querySelectorAll('.count').forEach(function (el) {
+      var target = parseInt(el.getAttribute('data-target'), 10) || 0;
+      if ('IntersectionObserver' in window && window.requestAnimationFrame) {
+        var start = null;
+        var dur = 1200;
+        var step = function (ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          el.textContent = Math.round(target * p);
+          if (p < 1) window.requestAnimationFrame(step);
+        };
+        window.requestAnimationFrame(step);
+      } else {
+        el.textContent = target;
+      }
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { runCounters(); cio.disconnect(); }
+      });
+    }, { threshold: 0.3 });
+    var statsEl = document.getElementById('stats');
+    if (statsEl) cio.observe(statsEl);
+  } else {
+    runCounters();
+  }
+  // Project form -> WhatsApp
+  function buildWaLink() {
+    var name = (document.getElementById('fName').value || '').trim() || 'Client';
+    var type = document.getElementById('fType').value;
+    var msg = (document.getElementById('fMsg').value || '').trim();
+    var text = 'Assalam-o-Alaikum! Main ' + name + ' hoon. Mujhe ' + type + ' chahiye.' + (msg ? ' Details: ' + msg : '');
+    return 'https://wa.me/923061601587?text=' + encodeURIComponent(text);
+  }
+  function sendProject() {
+    var url = buildWaLink();
+    window.__PORT = window.__PORT || {};
+    window.__PORT.lastWaLink = url;
+    try {
+      var w = window.open(url, '_blank');
+      if (!w) window.location.href = url;
+    } catch (e) {
+      // popup blocked / test env: link is saved in __PORT.lastWaLink
+    }
+  }
+  window.__PORT = { sendProject: sendProject, buildWaLink: buildWaLink, runCounters: runCounters, toggleMenu: toggleMenu };
+</script>
 </body>
 </html>
